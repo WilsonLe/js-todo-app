@@ -1,0 +1,102 @@
+:root{
+    /* body vars */
+    --font-family: Poppins, sans-serif;
+    --background: linear-gradient(120deg,#8fa3ff,#9d85ff);
+
+    /* header vars */
+    --header-height: 20vh;
+
+    /* form vars */
+    --form-height: 20vh;
+    --input-height: 1.5rem;
+    --input-padding: 0.25rem;
+    --button-height: 1.5rem;
+    --button-width: 1.5rem;
+
+    /* list vars */
+    --list-width: 50vw;
+    --item-border: 1px solid black;
+    --trash-border: 0px solid transparent;
+    --trash-padding: 5px;
+    --text-padding: 0.5rem;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: var(--font-family);
+    background: var(--background);
+}
+.wrapper {
+    height: 100%;
+    widows: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-container{
+    height: var(--header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-container{
+    height: var(--form-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container input{
+    display:grid;
+    place-items: center;
+    border: 0px;
+    height: var(--input-height);
+    padding: var(--input-padding);
+}
+
+.form-container button, .form-container button i {
+    display:grid;
+    place-items: center;
+    border: 0px;
+    height: var(--button-height);
+    width: var(--button-width);
+}
+.todo-list {
+    width: var(--list-width);
+}
+.todo-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: var(--item-border);
+    width: 100%;
+}
+.todo-text {
+    width: 100%;
+    border-right: var(--item-border);
+}
+.todo-remove {
+    padding: var(--trash-padding);
+    border: var(--trash-border);
+    background: none;
+}
+
+.todo-remove:hover{
+    background: #ffffff81;
+}
+.todo-remove:focus{
+    outline: none;
+}
+.todo-text{
+    display: flex;
+    text-align: left;
+    align-content: center;
+    padding-left: var(--text-padding);
+    color: white;
+}
