@@ -1,72 +1,84 @@
-//selectors
-const todoInput = document.querySelector('.todo-input')
-const todoButton = document.querySelector('.todo-button')
-const todoList = document.querySelector('.todo-list')
+let todos = []
+class UI {
+    setupApp() {
+        const todoButton = document.querySelector('.todo-button')
+        todoButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            var text = this.getInput()
+            this.clearInput()
+            this.renderInput(text).then(() => {
+                this.getRemoveButtons()
+            })
+        })
 
-
-//event listeners
-todoButton.addEventListener('click', (e) => {
-    id = Date.now();
-    e.preventDefault();
-    addTodo(id, addRemoveListener);
-
-})
-todoInput.addEventListener('change', () => {
-    addTask();
-})
-
-
-
-//init todo lists
-let todos = [];
-
-//functions
-
-function addTodo(id, callback) {
-    text = addTask();
-    if (text != '') {
-        //processing text
-        todos.push([`
-            <div class="todo-item" data-id="${id}">
-                <div class="todo-text">
-                    ${text}
-                </div>
-                <button class="todo-remove" data-id="${id}" id="${id}">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-            </div>
-        `,id])
-
-
-        //render to dom
-        var DOM = ``
-        for (i = 0; i < todos.length; i++) {
-            DOM += todos[i];
-        }
-        todoList.innerHTML = DOM
-
-        //clear inputs
-        clearInputs();
     }
-    callback(id);
-}
-function addTask() {
-    return todoInput.value;
-}
-function clearInputs() {
-    todoInput.value = '';
-}
-function addRemoveListener(id) {
-    document.getElementById(id).addEventListener('click', () => {
-        for (i = 0 ; i < todos.length; i++){
-            if (todos[i][1] == id){
-                todos.splice(i,1)
+    getInput() {
+        const todoInput = document.querySelector('.todo-input')
+        return todoInput.value
+    }
+    clearInput() {
+        const todoInput = document.querySelector('.todo-input')
+        todoInput.value = ''
+    }
+    async renderInput(input) {
+        try {
+            let id = Date.now()
+            if (input) {
+                todos.push([id, `
+                    <div class="todo-item" data-id="${id}">
+                        <div class="todo-text">
+                            ${input}
+                        </div>
+                        <button class="todo-remove" data-id="${id}" id="${id}">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `])
+            }
+            let DOM = ``
+            for (var i = 0; i < todos.length; i++) {
+                DOM += todos[i][1];
+            }
+            const todoList = document.querySelector('.todo-list')
+            todoList.innerHTML = DOM
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    getRemoveButtons() {
+        const RemoveButtons = [...document.querySelectorAll('.todo-remove')]
+        RemoveButtons.forEach(RemoveButton => {
+            RemoveButton.addEventListener('click', (e) => {
+                e.preventDefault()
+                let id = RemoveButton.dataset.id
+                this.removeElementfromTodo(id)
+                //render from todos
+                let DOM = ``
+                for (var i = 0; i < todos.length; i++) {
+                    DOM += todos[i][1];
+                }
+                const todoList = document.querySelector('.todo-list')
+                todoList.innerHTML = DOM
+
+                //re init
+                this.getRemoveButtons()
+            })
+        });
+    }
+    removeElementfromTodo(id) {
+        for (var i = 0; i < todos.length; i++) {
+            if (todos[i][0] == id) {
+                todos.splice(i, 1)
             }
         }
-        var DOM = ``
-        for (i = 0; i < todos.length; i++) {
-            DOM += todos[i];
-        }
-        todoList.innerHTML = DOM
-    })
+    }
 }
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    ui = new UI
+    ui.setupApp()
+})
