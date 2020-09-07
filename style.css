@@ -16,7 +16,8 @@
     /* list vars */
     --list-width: 50vw;
     --item-border: 1px solid black;
-    --trash-border: 5px solid transparent;
+    --trash-border: 0px solid transparent;
+    --trash-padding: 5px;
     --text-padding: 0.5rem;
 }
 *{
@@ -81,6 +82,7 @@ body {
     border-right: var(--item-border);
 }
 .todo-remove {
+    padding: var(--trash-padding);
     border: var(--trash-border);
     background: none;
 }
