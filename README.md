@@ -8,3 +8,6 @@ https://wilson-js-todo-app.netlify.app/
  1. Input text
  2. Press the Plus icon to add the task to list
  3. When done with the task, press the Trash icon to remove task.
+
+## Feature:
+ * Implement local storage to store the tasks. You can refresh and now lose the task.
