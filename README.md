@@ -10,4 +10,4 @@ https://wilson-js-todo-app.netlify.app/
  3. When done with the task, press the Trash icon to remove task.
 
 ## Feature:
- * Implement local storage to store the tasks. You can refresh and now lose the task.
+ * Implement local storage to store the tasks. You can refresh and not lose the task.
